@@ -42,7 +42,7 @@ def jobpost(request):
     data = request.data 
     serializer = JobPostingSerializer(data=data)
     if serializer.is_valid():
-   
+        serializer.save()
         return Response({
             
             'message': 'Job Posting created successfully',
