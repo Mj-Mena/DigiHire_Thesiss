@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --Black-Pearl: #0b1e33;
+  --Gray-Bg: #f1f2f4;
+  --Icons: #013c58;
+  --White: #FFFFF;
+}
+* {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+.wfull-h100 {
+  width: 100vw;
+  height: 100%;
+}
+.h100 {
+  height: 100%;
+}
+.second-div {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  display: grid;
+  gap: 20px;
+}
+.grid-temp {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  display: grid;
+}
+.logo {
+  display: grid;
+  grid-column-end: span 2;
+  grid-column-start: 3;
+}
+.lang {
+  grid-column-start: 9;
+}
+.gray {
+  background-color: var(--Gray-Bg);
+}
+.gray::before {
+  background-color: var(--Gray-Bg);
+}
+.wrap-f-stack {
+  grid-column-end: span 4;
+  grid-column-start: 3;
+  padding-top: 20%;
+  padding-bottom: 20%;
+}
+.pt {
+  padding-top: 20px;
+}
+.pb {
+  padding-bottom: 20px;
+}
+.maintext {
+  color: var(--Black-Pearl);
+}
+.scolor {
+  background-color: var(--Icons);
+}
+
+.f-600 {
+  font-weight: 600;
+}
+.btnw {
+  width: 70%;
+}
+.para {
+  width: 85%;
+}
+.headertext {
+  font-size: 2.5rem; /* 36px */
+  line-height: 2.5rem; /* 40px */
+}
+.br {
+  border-radius: 4px;
+}
+.pic {
+  grid-column-end: span 3;
+  grid-column-start: 8;
+  padding-top: 20%;
+  padding-bottom: 20%;
+}
+.val {
+  grid-column-end: span 2;
+}
+.imgcol {
+  background-color: #e7f0fa;
+}
+.ffdiv {
+  grid-column-end: span 3;
+  grid-column-start: 3;
+}
+.formdiv {
+  grid-column-end: span 5;
+  grid-column-start: 4;
+  background-color: #f4f4f6;
+  border-radius: 10px;
+}
+.inputc {
+  border: 1px solid gray;
+}
+.inputc:focus {
+  border: 2px solid rgb(0, 0, 0);
+}
+.indiv {
+  justify-self: center;
+  min-width: 400px;
+}
+.lang2 {
+  grid-column-start: 10;
+}
+.bs {
+  min-width: 900px;
+}
+.shadow2 {
+  transition: all 0.5s;
+  border-radius: 5px;
+}
+.shadow2:hover {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 12px;
+}
