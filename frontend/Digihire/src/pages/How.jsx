@@ -30,11 +30,11 @@ const How = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-6">
           <div className="hidden md:block col-span-1"></div>
 
-          <div className="col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="col-span-6 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {steps.map((step, index) => (
               <div
                 key={index}
-                className="p-5 rounded-md flex flex-col items-center justify-center transition-all duration-300 hover:bg-white hover:shadow-lg"
+                className="p-5 rounded-md flex flex-col items-center justify-center transition-all duration-300 hover:bg-white hover:shadow-xl"
               >
                 <div className="flex justify-center mb-4">
                   <img

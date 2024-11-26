@@ -1,13 +1,5 @@
 import React from "react";
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
-import {
-  MenuContent,
-  MenuItem,
-  MenuRoot,
-  MenuTrigger,
-} from "@/components/ui/menu";
 import "./page.css";
-import Footer from "./Footer";
 import Log from "./Log";
 const Sign = () => {
   const back = () => {
@@ -15,40 +7,7 @@ const Sign = () => {
   };
   return (
     <>
-      <div className="wfull-h100">
-        <Box
-          className="second-div"
-          display="grid"
-          alignItems="center"
-          p={4}
-          boxShadow="sm"
-          bg="light"
-        >
-          <Heading
-            className="logo maintext f-600 cursor-pointer"
-            onClick={back}
-          >
-            RPC
-          </Heading>
-          <MenuRoot>
-            <MenuTrigger asChild>
-              <Button
-                className="lang2 border-solid"
-                variant="outline"
-                size="sm"
-              >
-                Language
-              </Button>
-            </MenuTrigger>
-            <MenuContent>
-              <MenuItem value="tagalog">Tagalog</MenuItem>
-              <MenuItem value="english">English</MenuItem>
-            </MenuContent>
-          </MenuRoot>
-        </Box>
-      </div>
       <Log />
-      <Footer />
     </>
   );
 };

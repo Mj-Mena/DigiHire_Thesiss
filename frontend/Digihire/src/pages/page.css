@@ -98,7 +98,7 @@
   grid-column-end: span 5;
   grid-column-start: 4;
   background-color: #f4f4f6;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 .inputc {
   border: 1px solid gray;
@@ -122,4 +122,16 @@
 }
 .shadow2:hover {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 12px;
+}
+.gradient-background {
+  overflow: hidden;
+  background: radial-gradient(circle, rgba(255,255,255,1) 3%, rgba(11,30,51,1) 100%);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.primary {
+  color: #0B1E33;
 }
