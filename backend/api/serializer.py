@@ -21,3 +21,8 @@ class JobPostingSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobPosting
         fields = '__all__'
+
+class ApplicationSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Applicant
+        fields = "__all__"

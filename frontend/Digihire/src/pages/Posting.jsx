@@ -55,8 +55,8 @@ const Posting = ({ isOpen, onClose }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(datatosend),
-      }); 
-      console.log(response)
+      });
+      console.log(response);
     } catch (err) {
       console.log(err);
     }

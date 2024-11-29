@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'api',
     'rest_framework_simplejwt',
+    'django_rest_passwordreset',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'Digihire.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/"templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         "NAME": "DigiHire",
         "USER": "postgres",
-        "PASSWORD": "adm0987",
+        "PASSWORD": "admin",
         "HOST": "localhost",
         "PORT": "3000",
     }
@@ -149,3 +150,13 @@ SIMPLE_JWT = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 AUTH_USER_MODEL = 'api.Hruser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "kalsnipe6@gmail.com"
+EMAIL_HOST_PASSWORD = "brpj nsff lxuh lxwv"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]

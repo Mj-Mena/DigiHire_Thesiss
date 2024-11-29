@@ -49,6 +49,19 @@ def jobpost(request):
         }, status=status.HTTP_201_CREATED)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['POST'])
+def applicantsReq(request):
+    data = request.data 
+    serializer = JobPostingSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({
+            
+            'message': 'Application submitted created successfully',
+        }, status=status.HTTP_201_CREATED)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def getJobList(request):

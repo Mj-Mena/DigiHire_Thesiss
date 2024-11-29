@@ -8,7 +8,9 @@ import Landing from "./pages/Landing";
 import Sign from "./pages/Sign";
 import Hrdash from "./pages/Hrdash";
 import ProtectedRoute from "./pages/ProtectedRoute";
-
+import Form from "./pages/Form";
+import PasswordResetRequest from "./pages/PasswordResetRequest";
+import PasswordResetConfirm from "./pages/PasswordResetConfirm";
 const App = () => {
   return (
     <>
@@ -16,6 +18,15 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/sign" element={<Sign />} />
+          <Route path="/Form" element={<Form />} />
+          <Route
+            path="password-reset/:token"
+            element={<PasswordResetConfirm />}
+          />
+          <Route
+            path="/request/password_reset"
+            element={<PasswordResetRequest />}
+          />
           <Route
             path="/dashboard/:email"
             element={
