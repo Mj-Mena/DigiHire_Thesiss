@@ -13,6 +13,11 @@ import {
 import { Radio, RadioGroup } from "@/components/ui/radio";
 
 const Form = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [currentTab, setCurrentTab] = useState("personal");
   const tabOrder = [
     "personal",
@@ -24,21 +29,27 @@ const Form = () => {
     "references",
     "location",
   ];
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-  } = useForm({
-    mode: "onChange",
-  });
   const tabContainerRef = useRef(null);
-
-  const handleNext = () => {
-    const currentIndex = tabOrder.indexOf(currentTab);
-    if (currentIndex < tabOrder.length - 1) {
-      setCurrentTab(tabOrder[currentIndex + 1]);
-    } else {
-      console.log("dulo");
+  const onSubmit = (data) => {
+    console.log("Form submitted successfully:", data);
+    // Handle final form submission logic here
+  };
+  const handleNext = async () => {
+    try {
+      await handleSubmit((data) => {
+        console.log("Tab data is valid:", data);
+        const currentIndex = tabOrder.indexOf(currentTab);
+        if (currentIndex < tabOrder.length - 1) {
+          setCurrentTab(tabOrder[currentIndex + 1]);
+        } else {
+          console.log("End of tabs");
+          onSubmit(); // Final submission logic
+        }
+      })(); // Trigger form validation
+      // Move to the next tab if no validation errors
+    } catch (error) {
+      // Validation errors prevent navigation
+      console.log("Validation failed, cannot proceed to the next tab.");
     }
   };
 
@@ -249,6 +260,9 @@ const Form = () => {
                 <Box>
                   <label htmlFor="last-name">Last Name</label>
                   <Input
+                    {...register("Last_name", {
+                      required: "Last name is required",
+                    })}
                     bg="white"
                     id="last-name"
                     placeholder="Type here"
@@ -260,12 +274,20 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Last_name && (
+                    <p className="text-sm text-red-300">
+                      {errors.Last_name.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label bg="grey.50" htmlFor="first-name">
                     First Name
                   </label>
                   <Input
+                    {...register("First_name", {
+                      required: "First name is required",
+                    })}
                     bg="white"
                     id="first-name"
                     placeholder="Type here"
@@ -277,10 +299,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.First_name && (
+                    <p className="text-sm text-red-300">
+                      {errors.First_name.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="middle-name">Middle Name</label>
                   <Input
+                    {...register("Middle_name", {
+                      required: "Middle name is required",
+                    })}
                     bg="white"
                     id="middle-name"
                     placeholder="Type here"
@@ -292,6 +322,11 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Middle_name && (
+                    <p className="text-sm text-red-300">
+                      {errors.Middle_name.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="name-ext">Name Extension</label>
@@ -311,6 +346,9 @@ const Form = () => {
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="email">Email Address</label>
                   <Input
+                    {...register("Email", {
+                      required: "Email is required",
+                    })}
                     bg="white"
                     id="email"
                     type="email"
@@ -323,10 +361,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Email && (
+                    <p className="text-sm text-red-300">
+                      {errors.Email.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="facebook-account">Facebook Account</label>
                   <Input
+                    {...register("Fb", {
+                      required: "Facebook is required",
+                    })}
                     bg="white"
                     id="facebook-account"
                     placeholder="Type here"
@@ -338,10 +384,16 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Fb && (
+                    <p className="text-sm text-red-300">{errors.Fb.message}</p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 3", md: "span 4" }}>
                   <label htmlFor="present-address">Present Address</label>
                   <Input
+                    {...register("PresAdd", {
+                      required: "Present address is required",
+                    })}
                     bg="white"
                     id="present-address"
                     placeholder="House Number, Street, Barangay, City, Province, ZIP code"
@@ -353,10 +405,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.PresAdd && (
+                    <p className="text-sm text-red-300">
+                      {errors.PresAdd.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 3", md: "span 4" }}>
                   <label htmlFor="permanent-address">Permanent Address</label>
                   <Input
+                    {...register("PermaAdd", {
+                      required: "Permanent address is required",
+                    })}
                     bg="white"
                     id="permanent-address"
                     placeholder="House Number, Street, Barangay, City, Province, ZIP code"
@@ -368,10 +428,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.PermaAdd && (
+                    <p className="text-sm text-red-300">
+                      {errors.PermaAdd.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="sex">Sex</label>
                   <Input
+                    {...register("Sex", {
+                      required: "Sex is required",
+                    })}
                     bg="white"
                     id="sex"
                     placeholder="Type here"
@@ -383,10 +451,16 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Sex && (
+                    <p className="text-sm text-red-300">{errors.Sex.message}</p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="civilstatus">Civil Status</label>
                   <Input
+                    {...register("Civil", {
+                      required: "Civil status is required",
+                    })}
                     bg="white"
                     id="civilstatus"
                     placeholder="Type here"
@@ -398,10 +472,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Civil && (
+                    <p className="text-sm text-red-300">
+                      {errors.Civil.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="height">Height</label>
                   <Input
+                    {...register("Height", {
+                      required: "Height is required",
+                    })}
                     bg="white"
                     id="height"
                     placeholder="cm"
@@ -413,10 +495,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Height && (
+                    <p className="text-sm text-red-300">
+                      {errors.Height.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="weight">Weight</label>
                   <Input
+                    {...register("Weight", {
+                      required: "Weight is required",
+                    })}
                     bg="white"
                     id="weight"
                     placeholder="Kg"
@@ -428,10 +518,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Weight && (
+                    <p className="text-sm text-red-300">
+                      {errors.Weight.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="mobile-number">Mobile Number</label>
                   <Input
+                    {...register("Mobile", {
+                      required: "Mobile number is required",
+                    })}
                     bg="white"
                     id="mobile-number"
                     placeholder="Type here"
@@ -443,6 +541,11 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Mobile && (
+                    <p className="text-sm text-red-300">
+                      {errors.Mobile.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="landline">Landline</label>
@@ -462,6 +565,9 @@ const Form = () => {
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="birth-date">Date of Birth</label>
                   <Input
+                    {...register("Birthdate", {
+                      required: "Birthdate is required",
+                    })}
                     bg="white"
                     id="birth-date"
                     placeholder="MM/DD/YYYY"
@@ -473,10 +579,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Birthdate && (
+                    <p className="text-sm text-red-300">
+                      {errors.Birthdate.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="tin">Tin #</label>
                   <Input
+                    {...register("Tin", {
+                      required: "Tin number is required",
+                    })}
                     bg="white"
                     id="tin"
                     placeholder="Type here"
@@ -488,10 +602,16 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Tin && (
+                    <p className="text-sm text-red-300">{errors.Tin.message}</p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="sss">SSS #</label>
                   <Input
+                    {...register("SSS", {
+                      required: "SSS number is required",
+                    })}
                     bg="white"
                     id="sss"
                     placeholder="Type here"
@@ -503,10 +623,16 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.SSS && (
+                    <p className="text-sm text-red-300">{errors.SSS.message}</p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="pag-ibig">Pag-ibig #</label>
                   <Input
+                    {...register("Pag_ibig", {
+                      required: "Pag-ibig number is required",
+                    })}
                     bg="white"
                     id="pag-ibig"
                     placeholder="Type here"
@@ -518,10 +644,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Pag_ibig && (
+                    <p className="text-sm text-red-300">
+                      {errors.Pag_ibig.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="philhealth">Philhealth #</label>
                   <Input
+                    {...register("Philhealth", {
+                      required: "Philhealth number is required",
+                    })}
                     bg="white"
                     id="philhealth"
                     placeholder="Type here"
@@ -533,10 +667,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Philhealth && (
+                    <p className="text-sm text-red-300">
+                      {errors.Philhealth.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="nationality">Nationality</label>
                   <Input
+                    {...register("Nationality", {
+                      required: "Nationality is required",
+                    })}
                     bg="white"
                     id="nationality"
                     placeholder="Type here"
@@ -548,10 +690,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Nationality && (
+                    <p className="text-sm text-red-300">
+                      {errors.Nationality.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="religion">Religion</label>
                   <Input
+                    {...register("Religion", {
+                      required: "Religion is required",
+                    })}
                     bg="white"
                     id="religion"
                     placeholder="Type here"
@@ -563,10 +713,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Religion && (
+                    <p className="text-sm text-red-300">
+                      {errors.Religion.message}
+                    </p>
+                  )}
                 </Box>
                 <Box>
                   <label htmlFor="language">Language spoken</label>
                   <Input
+                    {...register("Language", {
+                      required: "Language is required",
+                    })}
                     bg="white"
                     id="language"
                     placeholder="Type here"
@@ -578,12 +736,21 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Language && (
+                    <p className="text-sm text-red-300">
+                      {errors.Language.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 1", md: "span 2" }}>
                   <label htmlFor="how">
                     How did you learn about our company?
                   </label>
                   <Input
+                    {...register("Media", {
+                      required:
+                        "Provide where did find the company advertisment",
+                    })}
                     bg="white"
                     id="how"
                     placeholder="Type here"
@@ -595,6 +762,11 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Media && (
+                    <p className="text-sm text-red-300">
+                      {errors.Media.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 2", md: "span 4" }}>
                   <label htmlFor="how">
@@ -625,7 +797,11 @@ const Form = () => {
                 </Box>
                 <Box gridColumn="span 2">
                   <label htmlFor="referal1">Relationship</label>
+
                   <Input
+                    {...register("Refrel", {
+                      required: "Provide answer",
+                    })}
                     bg="white"
                     id="referal1"
                     placeholder="Type here"
@@ -637,6 +813,11 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Refrel && (
+                    <p className="text-sm text-red-300">
+                      {errors.Refrel.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 2", md: "span 4" }}>
                   <label htmlFor="how">Are you currently employed?</label>
@@ -652,6 +833,9 @@ const Form = () => {
                     Date available to begin work
                   </label>
                   <Input
+                    {...register("Availability", {
+                      required: "Provide answer",
+                    })}
                     bg="white"
                     id="availability"
                     placeholder="Type here"
@@ -663,10 +847,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Availability && (
+                    <p className="text-sm text-red-300">
+                      {errors.Availability.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn="span 2">
                   <label htmlFor="salary">Salary Expectation</label>
                   <Input
+                    {...register("Salary", {
+                      required: "Provide answer",
+                    })}
                     bg="white"
                     id="salary"
                     placeholder="Type here"
@@ -678,6 +870,11 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Salary && (
+                    <p className="text-sm text-red-300">
+                      {errors.Salary.message}
+                    </p>
+                  )}
                 </Box>
               </Grid>
             </Box>
@@ -700,6 +897,9 @@ const Form = () => {
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="father-name">Father's Name</label>
                   <Input
+                    {...register("Father_name", {
+                      required: "Provide answer",
+                    })}
                     bg="white"
                     id="father-name"
                     placeholder="Type here"
@@ -711,10 +911,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Father_name && (
+                    <p className="text-sm text-red-300">
+                      {errors.Father_name.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="father-contact">Contact number</label>
                   <Input
+                    {...register("Father_contact", {
+                      required: "Provide answer",
+                    })}
                     bg="white"
                     id="father-contact"
                     placeholder="Type here"
@@ -726,10 +934,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Father_contact && (
+                    <p className="text-sm text-red-300">
+                      {errors.Father_contact.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
-                  <label htmlFor="father-name">Mother's Name</label>
+                  <label htmlFor="mother-name">Mother's Name</label>
                   <Input
+                    {...register("Mother_name", {
+                      required: "Mother_name is required",
+                    })}
                     bg="white"
                     id="mother-name"
                     placeholder="Type here"
@@ -741,10 +957,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Mother_name && (
+                    <p className="text-sm text-red-300">
+                      {errors.Mother_name.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="mother-contact">Contact number</label>
                   <Input
+                    {...register("Mother_contact", {
+                      required: "Mother_contact is required",
+                    })}
                     bg="white"
                     id="mother-contact"
                     placeholder="Type here"
@@ -756,10 +980,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Mother_contact && (
+                    <p className="text-sm text-red-300">
+                      {errors.Mother_contact.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 3", md: "span 4" }}>
                   <label htmlFor="parents-address">Address</label>
                   <Input
+                    {...register("Parents_address", {
+                      required: "Parents_address is required",
+                    })}
                     bg="white"
                     id="parents-address"
                     placeholder="House Number, Street, Barangay, City, Province, ZIP code"
@@ -771,6 +1003,11 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Parents_address && (
+                    <p className="text-sm text-red-300">
+                      {errors.Parents_address.message}
+                    </p>
+                  )}
                 </Box>
 
                 <Box gridColumn={{ base: "span 2", md: "span 4" }}>
@@ -1393,6 +1630,9 @@ const Form = () => {
                   </legend>
                   <label htmlFor="emergency-name">Name</label>
                   <Input
+                    {...register("Emergency_name", {
+                      required: "Emergency contact name is required",
+                    })}
                     bg="white"
                     id="emergency-name"
                     placeholder="Type here"
@@ -1404,10 +1644,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Emergency_name && (
+                    <p className="text-sm text-red-300">
+                      {errors.Emergency_name.message}
+                    </p>
+                  )}
                 </Box>
                 <Box colSpan={2} mt={10}>
                   <label htmlFor="relationship-eme">Relationship</label>
                   <Input
+                    {...register("Emergency_Rel", {
+                      required: "Relationship to emergency contact is required",
+                    })}
                     bg="white"
                     id="relationship-eme"
                     type="number"
@@ -1420,10 +1668,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Emergency_Rel && (
+                    <p className="text-sm text-red-300">
+                      {errors.Emergency_Rel.message}
+                    </p>
+                  )}
                 </Box>
                 <Box colSpan={2} mt={10}>
                   <label htmlFor="children-count">Occupation</label>
                   <Input
+                    {...register("Emergency_Occu", {
+                      required: "Occupation of emergency contact is required",
+                    })}
                     bg="white"
                     id="children-count"
                     type="number"
@@ -1436,6 +1692,11 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Emergency_Occu && (
+                    <p className="text-sm text-red-300">
+                      {errors.Emergency_Occu.message}
+                    </p>
+                  )}
                 </Box>
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="emergency-name">Name</label>
