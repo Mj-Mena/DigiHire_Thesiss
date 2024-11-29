@@ -13,6 +13,12 @@ const Firstsec = () => {
     { label: "Job Vacancies", value: "260" },
   ];
   const Icons = [search, person, search];
+    const handleclick = () => {
+      window.location = "http://localhost:5173/upload";
+    };
+    const back = () => {
+      window.location = "http://localhost:5173/";
+    };
   return (
     <>
       <div className="wfull-h100 gray pt pb-20">
@@ -27,7 +33,10 @@ const Firstsec = () => {
                 cooperative authorized to engage in garment manufacturing and
                 export.
               </p>
-              <button className="text-white text-sm br ml-2  bg-blue-light p-3 w-3/4 self-center">
+              <button 
+              className="text-white text-sm br ml-2 
+               bg-blue-light p-3 w-3/4 self-center"
+               onClick={handleclick}>
                 Apply Now
               </button>
               <p className=" text-sm mt-4 para text-gray-500">

@@ -1,0 +1,8 @@
+{
+  "name": "react-webcam",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react-webcam": "^7.2.0"
+  }
+}
