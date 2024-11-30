@@ -1,1 +1,1 @@
-web: gunicorn Digihire.wsgi:application
+web: gunicorn Digihire.asgi:application
