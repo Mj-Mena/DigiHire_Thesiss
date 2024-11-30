@@ -2,11 +2,13 @@ import React, { useCallback, useRef, useState } from "react";
 import { Box, Button, Container, Text, VStack, Flex, Spinner } from "@chakra-ui/react";
 import Webcam from "react-webcam";
 import html2canvas from "html2canvas";
+import { useNavigate } from "react-router-dom";
 
 function Camera() {
   const [img, setImg] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const webcamRef = useRef(null);
+  const navigate = useNavigate();
 
   const videoConstraints = {
     width: 640,  // Increased video width
@@ -28,29 +30,45 @@ function Camera() {
       // Simulate OCR processing (you can replace this with actual OCR logic)
       setTimeout(() => {
         setIsProcessing(false);  // Stop processing after 3 seconds (simulate OCR)
-        alert("OCR Processing Complete!");
+        alert("OCR Processing Complete!")
       }, 3000);
     }
   };
-
-  // Function to export image as PNG
-  const exportToPNG = () => {
-    // Create a div container to hold the captured image
-    const element = document.createElement("div");
-    const imgElement = document.createElement("img");
-    imgElement.src = img;
-    element.appendChild(imgElement);
-
-    // Use html2canvas to render the image to a canvas
-    html2canvas(element).then((canvas) => {
-      // Convert canvas to PNG and create a download link
-      const link = document.createElement("a");
-      link.href = canvas.toDataURL("image/png");
-      link.download = "captured_image.png";
-      link.click();
-    });
+  const handleCloseCamera = () => {
+    navigate('/upload');
+  };
+  const confirmation = () => {
+    navigate('/success')
   };
 
+  const exportToPNG = () => {
+    if (!img) return;
+  
+    const element = document.createElement("div");
+    element.style.display = "inline-block"; 
+    const imgElement = document.createElement("img");
+    imgElement.src = img;
+    
+    element.appendChild(imgElement);
+    document.body.appendChild(element);
+  
+    html2canvas(element, {
+      useCORS: true, 
+      allowTaint: true, 
+      logging: true, 
+    }).then((canvas) => {
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png");
+      link.download = "resume.png";
+      link.click();
+      confirmation();
+  
+      document.body.removeChild(element);
+    }).catch(error => {
+      console.error("Error capturing image:", error);
+    });
+  };
+  
   return (
     <Box bg="gray.50" minH="100vh" py={12}>
       <Container maxW="container.lg">
@@ -63,8 +81,8 @@ function Camera() {
           p={12}
           spacing={8}
         >
-          <Text fontSize="3xl" fontWeight="bold" color="gray.700">
-            Capture Your Photo
+          <Text fontSize="3xl" fontWeight="bold" color="#0B1E33">
+            Focus your resume
           </Text>
 
           <Flex
@@ -72,7 +90,7 @@ function Camera() {
             align="center"
             justify="center"
             border="2px dashed"
-            borderColor="gray.300"
+            borderColor="#0B1E33"
             p={8}
             borderRadius="md"
             w="100%"
@@ -83,7 +101,7 @@ function Camera() {
               <>
                 <Webcam
                   audio={false}
-                  mirrored={true}
+                  mirrored={false}
                   width="100%"
                   height="auto"
                   ref={webcamRef}
@@ -91,12 +109,14 @@ function Camera() {
                   videoConstraints={videoConstraints}
                 />
                 <Button
-                  colorScheme="blue"
+                  colorScheme="none"
                   size="lg"
                   mt={4}
                   onClick={capture}
                   w="50%"
                   boxShadow="lg"
+                  bg={"gray.50"} 
+                  color="#0B1E33"
                 >
                   Capture Resume
                 </Button>
@@ -107,12 +127,14 @@ function Camera() {
                   <img src={img} alt="screenshot" width="100%" height="auto" />
                 </Box>
                 <Button
-                  colorScheme="red"
+                  colorScheme="none"
                   size="lg"
                   mt={4}
                   onClick={() => setImg(null)}
                   w="50%"
                   boxShadow="lg"
+                  bg={"gray.50"} 
+                  color="#0B1E33"
                 >
                   Retake
                 </Button>
@@ -122,7 +144,7 @@ function Camera() {
 
           <Button
             colorScheme="none"
-            bg={"green.600"}
+            bg="#0B1E33"
             color="white"
             size="lg"
             w="100%"
@@ -130,24 +152,22 @@ function Camera() {
             boxShadow="lg"
             isLoading={isProcessing}
             loadingText="Processing"
-            onClick={handleSubmit}
+            onClick={exportToPNG}
             disabled={!img}
           >
             Submit
           </Button>
 
-          {img && (
             <Button
-              colorScheme="teal"
               size="lg"
               mt={4}
-              onClick={exportToPNG}
+              onClick={handleCloseCamera}
               w="100%"
               boxShadow="lg"
+              bg={"gray.50"} color="#0B1E33"
             >
-              Export to PNG
+              Back
             </Button>
-          )}
         </VStack>
       </Container>
     </Box>
