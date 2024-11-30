@@ -14,18 +14,17 @@ import PasswordResetConfirm from "./pages/PasswordResetConfirm";
 import Upload from "./pages/Upload";
 import Confirmation from "./pages/Confirmation";
 import Camera from "./pages/Camera";
+import Error from "./pages/Error";
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/upload" element={<Upload />} />
-<<<<<<< Updated upstream
           <Route path="/camera" element={<Camera />} />
-=======
-          <Route path="/camera" element={<Camera/>}/>
+          <Route path="/error" element={<Error />} />
           <Route path="/success" element={<Confirmation />} />
->>>>>>> Stashed changes
+
           <Route path="/" element={<Landing />} />
           <Route path="/sign" element={<Sign />} />
           <Route path="/Form" element={<Form />} />
