@@ -1034,6 +1034,7 @@ const Form = () => {
                       <Box gridColumn={{ base: "span 2", md: "span 3" }} p={2}>
                         <label htmlFor="sibling-names">Siblings Name</label>
                         <Input
+                          {...register("Sibling1")}
                           bg="white"
                           id="sibling1"
                           placeholder="Type here"
@@ -1047,6 +1048,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling2")}
                           bg="white"
                           id="sibling2"
                           placeholder="Type here"
@@ -1060,6 +1062,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling3")}
                           bg="white"
                           id="sibling3"
                           placeholder="Type here"
@@ -1073,6 +1076,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling4")}
                           bg="white"
                           id="sibling4"
                           placeholder="Type here"
@@ -1086,6 +1090,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling5")}
                           bg="white"
                           id="sibling5"
                           placeholder="Type here"
@@ -1102,6 +1107,7 @@ const Form = () => {
                       <Box gridColumn={{ base: "span 1", md: "span 1" }} p={2}>
                         <label htmlFor="sibling-names">Age</label>
                         <Input
+                          {...register("Sibling1Age")}
                           bg="white"
                           id="sibling1"
                           placeholder="Type here"
@@ -1115,6 +1121,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling2Age")}
                           bg="white"
                           id="sibling2"
                           placeholder="Type here"
@@ -1128,6 +1135,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling3Age")}
                           bg="white"
                           id="sibling3"
                           placeholder="Type here"
@@ -1141,6 +1149,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling4Age")}
                           bg="white"
                           id="sibling4"
                           placeholder="Type here"
@@ -1154,6 +1163,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling5Age")}
                           bg="white"
                           id="sibling5"
                           placeholder="Type here"
@@ -1170,6 +1180,7 @@ const Form = () => {
                       <Box gridColumn={{ base: "span 2", md: "span 2" }} p={2}>
                         <label htmlFor="sibling-names">Occupation</label>
                         <Input
+                          {...register("Sibling1Occu")}
                           bg="white"
                           id="sibling1"
                           placeholder="Type here"
@@ -1183,6 +1194,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling2Occu")}
                           bg="white"
                           id="sibling2"
                           placeholder="Type here"
@@ -1196,6 +1208,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling3Occu")}
                           bg="white"
                           id="sibling3"
                           placeholder="Type here"
@@ -1209,6 +1222,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling4Occu")}
                           bg="white"
                           id="sibling4"
                           placeholder="Type here"
@@ -1222,6 +1236,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling5Occu")}
                           bg="white"
                           id="sibling5"
                           placeholder="Type here"
@@ -1238,6 +1253,7 @@ const Form = () => {
                       <Box gridColumn={{ base: "span 2", md: "span 2" }} p={2}>
                         <label htmlFor="sibling-names">Contact #</label>
                         <Input
+                          {...register("Sibling1Cont")}
                           bg="white"
                           id="sibling1"
                           placeholder="Type here"
@@ -1251,6 +1267,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling2Cont")}
                           bg="white"
                           id="sibling2"
                           placeholder="Type here"
@@ -1264,6 +1281,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling3Cont")}
                           bg="white"
                           id="sibling3"
                           placeholder="Type here"
@@ -1277,6 +1295,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling4Cont")}
                           bg="white"
                           id="sibling4"
                           placeholder="Type here"
@@ -1290,6 +1309,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Sibling5Cont")}
                           bg="white"
                           id="sibling5"
                           placeholder="Type here"
@@ -1329,7 +1349,6 @@ const Form = () => {
                   <Input
                     bg="white"
                     id="children-count"
-                    type="number"
                     placeholder="Type here"
                     _focus={{
                       borderColor: "gray.900",
