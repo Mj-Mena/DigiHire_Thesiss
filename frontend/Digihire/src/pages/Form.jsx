@@ -1332,6 +1332,7 @@ const Form = () => {
                   </legend>
                   <label htmlFor="spouse-name">Spouse's Name</label>
                   <Input
+                    {...register("Spousename")}
                     bg="white"
                     id="spouse-name"
                     placeholder="Type here"
@@ -1347,6 +1348,7 @@ const Form = () => {
                 <Box colSpan={2} mt={10}>
                   <label htmlFor="children-count">Occupation</label>
                   <Input
+                    {...register("SpouseOccu")}
                     bg="white"
                     id="children-count"
                     placeholder="Type here"
@@ -1362,6 +1364,7 @@ const Form = () => {
                 <Box colSpan={2} mt={10}>
                   <label htmlFor="mother-contact">Contact number</label>
                   <Input
+                    {...register("SpouseCont")}
                     bg="white"
                     id="mother-contact"
                     placeholder="Type here"
@@ -1377,6 +1380,7 @@ const Form = () => {
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="spouse-name">Name of Employer</label>
                   <Input
+                    {...register("SpouseEmployer")}
                     bg="white"
                     id="spouse-name"
                     placeholder="Type here"
@@ -1392,6 +1396,7 @@ const Form = () => {
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
                   <label htmlFor="spouse-name">Address of Employer</label>
                   <Input
+                    {...register("SpouseAddress")}
                     bg="white"
                     id="spouse-name"
                     placeholder="Type here"
@@ -1408,6 +1413,7 @@ const Form = () => {
                 <Box gridColumn={{ base: "span 2", md: "span 4" }}>
                   <label htmlFor="how">Number of Children</label>
                   <Input
+                    {...register("Childnum")}
                     bg="white"
                     id="spouse-name"
                     placeholder="Type here"
@@ -1439,6 +1445,7 @@ const Form = () => {
                       <Box gridColumn={{ base: "span 2", md: "span 3" }} p={2}>
                         <label htmlFor="children-names">Children Name</label>
                         <Input
+                          {...register("Childname1")}
                           bg="white"
                           id="child1"
                           placeholder="Type here"
@@ -1452,6 +1459,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Childname2")}
                           bg="white"
                           id="child2"
                           placeholder="Type here"
@@ -1465,6 +1473,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Childname3")}
                           bg="white"
                           id="child3"
                           placeholder="Type here"
@@ -1478,6 +1487,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Childname4")}
                           bg="white"
                           id="child4"
                           placeholder="Type here"
@@ -1491,6 +1501,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Childname5")}
                           bg="white"
                           id="child5"
                           placeholder="Type here"
@@ -1507,6 +1518,7 @@ const Form = () => {
                       <Box gridColumn={{ base: "span 2", md: "span 2" }} p={2}>
                         <label htmlFor="dobchild">Date of Birth</label>
                         <Input
+                          {...register("Child1birthdate")}
                           bg="white"
                           id="dobchild1"
                           placeholder="Type here"
@@ -1520,6 +1532,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Child2birthdate")}
                           bg="white"
                           id="dobchild2"
                           placeholder="Type here"
@@ -1533,6 +1546,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Child3birthdate")}
                           bg="white"
                           id="dobchild3"
                           placeholder="Type here"
@@ -1546,6 +1560,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Child4birthdate")}
                           bg="white"
                           id="dobchild4"
                           placeholder="Type here"
@@ -1559,6 +1574,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("Child5birthdate")}
                           bg="white"
                           id="dobchild5"
                           placeholder="Type here"
@@ -1575,6 +1591,7 @@ const Form = () => {
                       <Box gridColumn={{ base: "span 1", md: "span 1" }} p={2}>
                         <label htmlFor="child-age">Age</label>
                         <Input
+                          {...register("ChildAge1")}
                           bg="white"
                           id="childage1"
                           placeholder="Type here"
@@ -1588,6 +1605,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("ChildAge2")}
                           bg="white"
                           id="childage2"
                           placeholder="Type here"
@@ -1601,6 +1619,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("ChildAge3")}
                           bg="white"
                           id="childage3"
                           placeholder="Type here"
@@ -1614,6 +1633,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("ChildAge4")}
                           bg="white"
                           id="childage4"
                           placeholder="Type here"
@@ -1627,6 +1647,7 @@ const Form = () => {
                           mb={2}
                         />
                         <Input
+                          {...register("ChildAge5")}
                           bg="white"
                           id="childage5"
                           placeholder="Type here"
@@ -1718,8 +1739,11 @@ const Form = () => {
                   )}
                 </Box>
                 <Box gridColumn={{ base: "span 2", md: "span 2" }}>
-                  <label htmlFor="emergency-name">Name</label>
+                  <label htmlFor="emergency-name">Email</label>
                   <Input
+                    {...register("Emergency_Email", {
+                      required: "Occupation of emergency contact is required",
+                    })}
                     bg="white"
                     id="emergency-name"
                     placeholder="Type here"
@@ -1731,10 +1755,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Emergency_Email && (
+                    <p className="text-sm text-red-300">
+                      {errors.Emergency_Email.message}
+                    </p>
+                  )}
                 </Box>
                 <Box colSpan={2}>
                   <label htmlFor="emergency-contact">Cellphone #</label>
                   <Input
+                    {...register("Emergency_Cell", {
+                      required: "Occupation of emergency contact is required",
+                    })}
                     bg="white"
                     id="emergency-contact"
                     type="number"
@@ -1747,10 +1779,18 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Emergency_Cell && (
+                    <p className="text-sm text-red-300">
+                      {errors.Emergency_Cell.message}
+                    </p>
+                  )}
                 </Box>
                 <Box colSpan={2}>
-                  <label htmlFor="emergency-contact1">Land Line</label>
+                  <label htmlFor="emergency-contact1">Landline</label>
                   <Input
+                    {...register("Emergency_Landline", {
+                      required: "Occupation of emergency contact is required",
+                    })}
                     bg="white"
                     id="emergency-contact1"
                     type="number"
@@ -1763,6 +1803,11 @@ const Form = () => {
                     border="2px solid gray"
                     p={2}
                   />
+                  {errors.Emergency_Landline && (
+                    <p className="text-sm text-red-300">
+                      {errors.Emergency_Landline.message}
+                    </p>
+                  )}
                 </Box>
               </Grid>
             </Box>
