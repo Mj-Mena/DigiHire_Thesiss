@@ -1,15 +1,16 @@
 services:
   - type: web
-    name: digihire-backend # Your project name
+    name: digihire-backend
     env: python
-    buildCommand: "pip install -r backend/requirements.txt" # Specify the path to requirements.txt
-    startCommand: "python backend/manage.py migrate && gunicorn backend.Digihire.wsgi:application" # Correct path to manage.py and wsgi.py
+    plan: free
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "python backend/manage.py migrate && gunicorn backend.Digihire.wsgi:application"
     envVars:
       - key: DJANGO_SECRET_KEY
-        value: "your-secret-key-here" # Replace with your actual Django secret key
+        value: "your-secret-key-here"
       - key: DJANGO_DEBUG
-        value: "false" # Set to "true" if you're in development, otherwise "false" for production
+        value: "false"
       - key: DATABASE_URL
-        value: "postgres://postgres:admin@localhost:5432/DigiHire" # Local PostgreSQL connection (for development only)
-    plan: free # Choose a plan based on your needs
-    autoDeploy: true # Automatically deploy on changes
+        value: "postgres://postgres:admin@localhost:5432/DigiHire"
+    pythonVersion: "3.8" # Add this line to specify the Python version
+    autoDeploy: true
