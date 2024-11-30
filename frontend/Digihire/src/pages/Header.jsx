@@ -9,7 +9,7 @@ import {
 import "./page.css";
 const Header = () => {
   const handleclick = () => {
-    window.location = "http://192.168.254.112:5173/sign";
+    window.location = "https://192.168.254.112:5173/sign";
   };
   const back = () => {
     window.location = "http://localhost:5173/";

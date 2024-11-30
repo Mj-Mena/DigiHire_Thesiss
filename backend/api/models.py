@@ -99,6 +99,7 @@ class Applicant(models.Model):
     spousecontact = models.CharField(max_length=255, null=True, blank=True)
     spousenameemployer = models.CharField(max_length=255, null=True, blank=True)
     spouseaddress = models.CharField(max_length=255, null=True, blank=True)
+    childnum = models.CharField(max_length=255, null=True, blank=True)
     childname1 = models.CharField(max_length=255, null=True, blank=True)
     childname2 = models.CharField(max_length=255, null=True, blank=True)
     childname3 = models.CharField(max_length=255, null=True, blank=True)

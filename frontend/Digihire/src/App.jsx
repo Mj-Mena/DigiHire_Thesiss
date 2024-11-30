@@ -19,7 +19,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/upload" element={<Upload />} />
-          <Route path="/camera" element={<Camera/>}/>
+          <Route path="/camera" element={<Camera />} />
           <Route path="/" element={<Landing />} />
           <Route path="/sign" element={<Sign />} />
           <Route path="/Form" element={<Form />} />

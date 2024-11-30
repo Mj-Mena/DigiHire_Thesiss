@@ -1,9 +1,3 @@
-from dotenv import load_dotenv
-import os
-
-load_dotenv()  # Load environment variables from .env file
-
-VITE_BACKEND_URL = os.getenv('VITE_BACKEND_URL', 'http://192.168.254.105:5173')
 """
 Django settings for Digihire project.
 
@@ -17,7 +11,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
+load_dotenv()  # Load environment variables from .env file
+
+VITE_BACKEND_URL = os.getenv('VITE_BACKEND_URL', 'http://192.168.254.112:5173/')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -91,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         "NAME": "DigiHire",
         "USER": "postgres",
-        "PASSWORD": "adm0987",
+        "PASSWORD": "admin",
         "HOST": "localhost",
         "PORT": "3000",
     }
