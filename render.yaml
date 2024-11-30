@@ -10,13 +10,6 @@ services:
       - key: DJANGO_DEBUG
         value: "false" # Set to "true" if you're in development, otherwise "false" for production
       - key: DATABASE_URL
-        value: "postgres://postgres:admin@localhost:5432/DigiHire" # Local PostgreSQL connection
+        value: "postgres://postgres:admin@localhost:5432/DigiHire" # Local PostgreSQL connection (for development only)
     plan: free # Choose a plan based on your needs
     autoDeploy: true # Automatically deploy on changes
-
-addOns:
-  - name: postgres
-    plan: free # Choose a plan based on your needs
-    databaseName: DigiHire
-    user: postgres
-    password: admin
