@@ -12,7 +12,7 @@ const Upload = () => {
     <>
     <Header/>
       <UploadResume />
-      <Footer/>
+    <Footer/>
     </>
   );
 };

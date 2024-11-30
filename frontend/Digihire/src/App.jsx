@@ -12,6 +12,7 @@ import Form from "./pages/Form";
 import PasswordResetRequest from "./pages/PasswordResetRequest";
 import PasswordResetConfirm from "./pages/PasswordResetConfirm";
 import Upload from "./pages/Upload";
+import Confirmation from "./pages/Confirmation";
 import Camera from "./pages/Camera";
 const App = () => {
   return (
@@ -19,7 +20,12 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/upload" element={<Upload />} />
+<<<<<<< Updated upstream
           <Route path="/camera" element={<Camera />} />
+=======
+          <Route path="/camera" element={<Camera/>}/>
+          <Route path="/success" element={<Confirmation />} />
+>>>>>>> Stashed changes
           <Route path="/" element={<Landing />} />
           <Route path="/sign" element={<Sign />} />
           <Route path="/Form" element={<Form />} />

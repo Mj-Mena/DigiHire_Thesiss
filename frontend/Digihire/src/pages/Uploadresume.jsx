@@ -4,6 +4,7 @@ import {
   Button,
   Container,
   Flex,
+  Grid,
   Text,
   VStack,
 } from '@chakra-ui/react';
@@ -12,27 +13,26 @@ import { useNavigate } from 'react-router-dom';
 const UploadResume = () => {
   const navigate = useNavigate();
   const handleOpenCamera = () => {
-    window.location('http://192.168.254.112:5173/camera');  
+    navigate('/camera');  
   };
-
   const handleCloseCamera = () => {
-    setIsCameraOpen(false);
+    navigate('/');
   };
 
   return (
-    <Box bg="gray.50" minH="100vh" py={8}>
+    <Box bg="gray.50" minH="69vh" py={8} boxShadow="lg">
       <Container maxW="container.md">
+      <Grid templateColumns="1fr 3fr 3fr 1fr" gap={6}>
         {/* Upload Box */}
         <VStack
           bg="white"
           shadow="md"
           borderRadius="md"
-          borderWidth="1px"
-          borderColor="gray.200"
           p={8}
           spacing={4}
+          gridColumn="2 / span 2" 
         >
-          <Text fontSize="xl" fontWeight="semibold">
+          <Text fontSize="xl" fontWeight="semibold" color="#0B1E33">
             Capture Resume
           </Text>
           <Flex
@@ -40,14 +40,21 @@ const UploadResume = () => {
             align="center"
             justify="center"
             border="2px dashed"
-            borderColor="gray.300"
+            borderColor="#0B1E33"
             p={8}
+            bg="gray.50"
             borderRadius="md"
             w="100%"
           >
+            <img
+              src="/iconcloud.png"
+              alt="Cloud Icon" 
+              className="w-21 h-20"
+            />
+
             <Text fontSize="sm" color="gray.500" mt={2}>
               Click & capture your resume {' '}
-              <Text as="span" color="blue.400" cursor="pointer" onClick={handleOpenCamera}>
+              <Text as="span" color="#0B1E33" cursor="pointer" onClick={handleOpenCamera}>
                 Open
               </Text>
             </Text>
@@ -57,11 +64,21 @@ const UploadResume = () => {
           </Flex>
 
           {/* Button to open camera */}
-          <Button colorScheme="none" color="black"  size="md" mt={4} onClick={handleOpenCamera}>
+          <Button colorScheme="none"
+            bg={"#0B1E33"}
+            color="white"
+            size="lg"
+            w="100%"
+            mt={6}
+            boxShadow="lg" onClick={handleOpenCamera}>
             Open Camera
+          </Button>
+          <Button colorScheme="none" bg={"gray.50"} color="#0B1E33"  size="lg" boxShadow="lg" mt={4} w="100%" onClick={handleCloseCamera}>
+            Back
           </Button>
 
         </VStack>
+        </Grid>
       </Container>
     </Box>
   );
