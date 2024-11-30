@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 const UploadResume = () => {
   const navigate = useNavigate();
   const handleOpenCamera = () => {
-    navigate('/camera');  
+    window.location('http://192.168.254.112:5173/camera');  
   };
 
   const handleCloseCamera = () => {
