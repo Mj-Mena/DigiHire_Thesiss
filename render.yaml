@@ -12,5 +12,5 @@ services:
         value: "false"
       - key: DATABASE_URL
         value: "postgres://postgres:admin@localhost:5432/DigiHire"
-    pythonVersion: "3.8" # Add this line to specify the Python version
+
     autoDeploy: true
