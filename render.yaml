@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: digihire-backend
+    env: python
+    plan: free
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "python backend/manage.py migrate && gunicorn backend.Digihire.wsgi:application"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: "your-secret-key-here"
+      - key: DJANGO_DEBUG
+        value: "false"
+      - key: DATABASE_URL
+        value: "postgres://postgres:admin@localhost:5432/DigiHire"
+
+    autoDeploy: true
