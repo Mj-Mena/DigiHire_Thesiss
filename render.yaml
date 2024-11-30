@@ -1,25 +1,22 @@
 services:
   - type: web
-    name: digihire-backend # Changed to your project name, Digihire
+    name: digihire-backend # Your project name
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "python manage.py migrate && gunicorn digihire.wsgi:application" # Updated with your project name
+    startCommand: "python manage.py migrate && gunicorn digihire.wsgi:application"
     envVars:
       - key: DJANGO_SECRET_KEY
         value: "your-secret-key-here" # Replace with your actual Django secret key
       - key: DJANGO_DEBUG
         value: "false" # Set to "true" if you're in development, otherwise "false" for production
       - key: DATABASE_URL
-        value: "postgres://postgres:admin@localhost:3000/DigiHire" # Using your local Postgres credentials
-    plan: free # Choose a plan based on your needs (free, starter, etc.)
+        value: "postgres://postgres:admin@localhost:5432/DigiHire" # Local PostgreSQL connection
+    plan: free # Choose a plan based on your needs
     autoDeploy: true # Automatically deploy on changes
 
-  - type: database
-    name: digihire-database # Unique name for your database
+addOns:
+  - name: postgres
     plan: free # Choose a plan based on your needs
-    dbName: DigiHire # Matches your local database name
-    dbUser: postgres # Matches your local database user
-    dbPassword: admin # Matches your local database password
-    dbPort: 5432 # Default PostgreSQL port (keep this as it is)
-    dbHost: localhost # Connecting to localhost
-    autoDeploy: true
+    databaseName: DigiHire
+    user: postgres
+    password: admin
