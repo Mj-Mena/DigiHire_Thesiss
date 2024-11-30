@@ -11,11 +11,15 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Form from "./pages/Form";
 import PasswordResetRequest from "./pages/PasswordResetRequest";
 import PasswordResetConfirm from "./pages/PasswordResetConfirm";
+import Upload from "./pages/Upload";
+import Camera from "./pages/Camera";
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/camera" element={<Camera/>}/>
           <Route path="/" element={<Landing />} />
           <Route path="/sign" element={<Sign />} />
           <Route path="/Form" element={<Form />} />

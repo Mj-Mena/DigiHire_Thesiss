@@ -7,12 +7,12 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const UploadResume = () => {
-  const [isCameraOpen, setIsCameraOpen] = useState(false);
-
+  const navigate = useNavigate();
   const handleOpenCamera = () => {
-    setIsCameraOpen(true);
+    navigate('/camera');  
   };
 
   const handleCloseCamera = () => {
@@ -20,7 +20,6 @@ const UploadResume = () => {
   };
 
   return (
-    
     <Box bg="gray.50" minH="100vh" py={8}>
       <Container maxW="container.md">
         {/* Upload Box */}
@@ -34,7 +33,7 @@ const UploadResume = () => {
           spacing={4}
         >
           <Text fontSize="xl" fontWeight="semibold">
-            Upload Resume
+            Capture Resume
           </Text>
           <Flex
             direction="column"
@@ -47,9 +46,9 @@ const UploadResume = () => {
             w="100%"
           >
             <Text fontSize="sm" color="gray.500" mt={2}>
-              Drag & drop files or{' '}
-              <Text as="span" color="blue.400" cursor="pointer">
-                Browse
+              Click & capture your resume {' '}
+              <Text as="span" color="blue.400" cursor="pointer" onClick={handleOpenCamera}>
+                Open
               </Text>
             </Text>
             <Text fontSize="xs" color="gray.500">
@@ -58,16 +57,10 @@ const UploadResume = () => {
           </Flex>
 
           {/* Button to open camera */}
-          <Button colorScheme="blue" size="md" mt={4} onClick={handleOpenCamera}>
+          <Button colorScheme="none" color="black"  size="md" mt={4} onClick={handleOpenCamera}>
             Open Camera
           </Button>
 
-          {/* If the camera is open, show the WebcamImage component */}
-          {isCameraOpen && <WebcamImage onClose={handleCloseCamera} />}
-          
-          <Button colorScheme="blue" size="md" w="100%" mt={4}>
-            Continue
-          </Button>
         </VStack>
       </Container>
     </Box>
