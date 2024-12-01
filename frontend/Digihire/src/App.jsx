@@ -13,6 +13,7 @@ import PasswordResetRequest from "./pages/PasswordResetRequest";
 import PasswordResetConfirm from "./pages/PasswordResetConfirm";
 import Upload from "./pages/Upload";
 import Camera from "./pages/Camera";
+import Error from "./pages/Error";
 const App = () => {
   return (
     <>
@@ -20,6 +21,9 @@ const App = () => {
         <Routes>
           <Route path="/upload" element={<Upload />} />
           <Route path="/camera" element={<Camera />} />
+          <Route path="/error" element={<Error />} />
+          <Route path="/success" element={<Confirmation />} />
+
           <Route path="/" element={<Landing />} />
           <Route path="/sign" element={<Sign />} />
           <Route path="/Form" element={<Form />} />

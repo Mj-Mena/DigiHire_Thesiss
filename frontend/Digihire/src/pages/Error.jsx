@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, Text, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
-const Confirmation = () => {
+const Error = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -15,7 +15,7 @@ const Confirmation = () => {
       <div className="flex-1 flex justify-start items-center p-4">
         <div className="image-container">
           <img
-            src="/success.png"
+            src="/error.png"
             alt="Descriptive text for image"
             className="w-[500px] h-[500px] object-contain ml={9}" 
           />
@@ -29,16 +29,28 @@ const Confirmation = () => {
           wrap="wrap"
         >
           <Text fontSize={["lg", "2xl"]} fontWeight="bold" color="#0B1E33" >
-            Congratulations!
+            WOOPS!
           </Text>
           <Text color="gray.600" className="text-center" fontSize={["md", "lg"]} whiteSpace={'normal'}> 
-            Your resume was successfully submitted. <br></br>
-            Kindly wait for guidance.
+            An error has been occured. <br></br>
+            Try again.
           </Text>
           <Button colorScheme="none" color="#0B1E33"  size="lg" mt={4} w="100%" onClick={handleBack} _hover={{ textDecoration: 'underline' }}
             textDecoration="underline">
             Go Back
           </Button>
+          <Button
+            colorScheme="none"
+            color="#0B1E33"
+            size="lg"
+            mt={2}
+            w="100%"
+            onClick={() => window.location.reload()} // Refreshes the page
+            _hover={{ textDecoration: 'underline' }}
+            textDecoration="underline"
+            >
+            Refresh Page
+        </Button>
         </VStack>
       </div>
     </div>
@@ -49,4 +61,4 @@ const Confirmation = () => {
 };
 
 
-export default Confirmation;
+export default Error;
