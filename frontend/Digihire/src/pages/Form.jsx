@@ -1028,7 +1028,6 @@ const Form = () => {
                       outlineOffset: "1px",
                     }}
                     border="2px solid gray"
-                    p={2}
                   >
                     <Stack direction="row" h="50" gap="4">
                       <Box gridColumn={{ base: "span 2", md: "span 3" }} p={2}>
@@ -1439,7 +1438,6 @@ const Form = () => {
                       outlineOffset: "1px",
                     }}
                     border="2px solid gray"
-                    p={2}
                   >
                     <Stack direction="row" h="50" gap="4">
                       <Box gridColumn={{ base: "span 2", md: "span 3" }} p={2}>

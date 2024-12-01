@@ -11,7 +11,9 @@ const Getjobpost = () => {
 
   const fetchJob = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/log_hr/jobPost");
+      const response = await fetch(
+        "https://192.168.254.112:8000/log_hr/jobPost"
+      );
       const data = await response.json();
       setJobs(data); // Store the fetched jobs in state
     } catch (error) {

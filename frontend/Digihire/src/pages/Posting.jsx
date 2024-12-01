@@ -49,14 +49,18 @@ const Posting = ({ isOpen, onClose }) => {
         jobLabel: joblabel,
         createdBy: user,
       };
-      const response = await fetch("http://127.0.0.1:8000/log_hr/postJob", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datatosend),
-      });
+      const response = await fetch(
+        "https://192.168.254.112:8000/log_hr/postJob",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(datatosend),
+        }
+      );
       console.log(response);
+      console.log(datatosend);
     } catch (err) {
       console.log(err);
     }

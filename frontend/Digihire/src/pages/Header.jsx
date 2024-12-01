@@ -12,7 +12,7 @@ const Header = () => {
     window.location = "https://192.168.254.112:5173/sign";
   };
   const back = () => {
-    window.location = "http://localhost:5173/";
+    window.location = "https://192.168.254.112:5173/";
   };
   return (
     <>

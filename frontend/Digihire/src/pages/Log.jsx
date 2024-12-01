@@ -26,7 +26,7 @@ const Log = () => {
         email: emailtosend,
         password: passtosend,
       };
-      const response = await fetch("http://127.0.0.1:8000/api/log_hr/", {
+      const response = await fetch("https://192.168.254.112:8000/api/log_hr/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,6 +37,7 @@ const Log = () => {
       console.log(response.status);
       localStorage.setItem("access", hr.access);
       localStorage.setItem("refresh", hr.refresh);
+      localStorage.setItem("user", hr.email);
       if (response.status == 200) {
         navigate(`/dashboard/${hr.email}`);
       } else {
