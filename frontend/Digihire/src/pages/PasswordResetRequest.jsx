@@ -24,7 +24,7 @@ const PasswordResetRequest = () => {
         email: emailtosend,
       };
       const response = await fetch(
-        "http://127.0.0.1:8000/api/password_reset/",
+        "https://192.168.254.112:8000/password_reset/",
         {
           method: "POST",
           headers: {

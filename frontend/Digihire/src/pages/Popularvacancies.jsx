@@ -2,14 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Box, Grid } from "@chakra-ui/react";
 import { IoIosArrowDown } from "react-icons/io";
 import "./page.css";
+import { useNavigate } from "react-router-dom";
 
 const Popularvacancies = () => {
   const [jobs, setJobs] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchJob();
   }, []);
-
+  const showbox = (jobTitle) => {
+    console.log("Clicked Job Title:", jobTitle);
+    navigate(`/camera/${jobTitle}`);
+    localStorage.setItem("jobtitle", jobTitle);
+  };
   const fetchJob = async () => {
     try {
       const response = await fetch(
@@ -54,8 +59,13 @@ const Popularvacancies = () => {
                       {job.neededApplicant} open position
                     </span>
                   </div>
-                  <div className="p-2 ml-auto flex items-center">
-                    <IoIosArrowDown size={20} />
+                  <div className=" p-2 ml-auto flex items-center">
+                    <IoIosArrowDown
+                      size={20}
+                      onClick={() => {
+                        showbox(job.JobTitle);
+                      }}
+                    />
                   </div>
                 </div>
               </Box>

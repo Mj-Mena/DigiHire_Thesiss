@@ -28,7 +28,7 @@ const PasswordResetConfirm = () => {
         token: token,
       };
       const response = await fetch(
-        "http://127.0.0.1:8000/api/password_reset/confirm/",
+        "https://192.168.254.112:8000/password_reset/confirm/",
         {
           method: "POST",
           headers: {

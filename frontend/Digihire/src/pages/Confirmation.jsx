@@ -1,52 +1,62 @@
-import React from 'react';
-import { Box, Button, Text, VStack } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { Button, Text, VStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Confirmation = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate('/'); 
+    navigate("/");
   };
 
   return (
     <div className="color-white align-items-center justify-content-center flex min-h-screen">
-    <div className="w-[80vw] h-[90vh] min-h-[430px] p-0 border border-solid border-white flex items-center justify-center bg-[white]">
-      <div className="flex-1 flex justify-start items-center p-4">
-        <div className="image-container">
-          <img
-            src="/success.png"
-            alt="Descriptive text for image"
-            className="w-[500px] h-[500px] object-contain ml={9}" 
-          />
+      <div className="w-[80vw] h-[90vh] min-h-[430px] p-0 border border-solid border-white flex items-center justify-center bg-[white]">
+        <div className="flex-1 flex justify-start items-center p-4">
+          <div className="image-container">
+            <img
+              src="/success.png"
+              alt="Descriptive text for image"
+              className="w-[500px] h-[500px] object-contain ml={9}"
+            />
+          </div>
+          <VStack
+            height="80vh"
+            width={["90vw", "60vw", "40vw"]}
+            spacing={6}
+            align="center"
+            justify="center"
+            wrap="wrap"
+          >
+            <Text fontSize={["lg", "2xl"]} fontWeight="bold" color="#0B1E33">
+              Congratulations!
+            </Text>
+            <Text
+              color="gray.600"
+              className="text-center"
+              fontSize={["md", "lg"]}
+              whiteSpace={"normal"}
+            >
+              Your resume was successfully submitted. <br></br>
+              Kindly wait for guidance.
+            </Text>
+            <Button
+              colorScheme="none"
+              color="#0B1E33"
+              size="lg"
+              mt={4}
+              w="100%"
+              onClick={handleBack}
+              _hover={{ textDecoration: "underline" }}
+              textDecoration="underline"
+            >
+              Go Back
+            </Button>
+          </VStack>
         </div>
-        <VStack 
-          height="80vh"
-          width={["90vw", "60vw", "40vw"]}
-          spacing={6} 
-          align="center" 
-          justify="center"
-          wrap="wrap"
-        >
-          <Text fontSize={["lg", "2xl"]} fontWeight="bold" color="#0B1E33" >
-            Congratulations!
-          </Text>
-          <Text color="gray.600" className="text-center" fontSize={["md", "lg"]} whiteSpace={'normal'}> 
-            Your resume was successfully submitted. <br></br>
-            Kindly wait for guidance.
-          </Text>
-          <Button colorScheme="none" color="#0B1E33"  size="lg" mt={4} w="100%" onClick={handleBack} _hover={{ textDecoration: 'underline' }}
-            textDecoration="underline">
-            Go Back
-          </Button>
-        </VStack>
       </div>
     </div>
-    </div>
-    
-
   );
 };
-
 
 export default Confirmation;

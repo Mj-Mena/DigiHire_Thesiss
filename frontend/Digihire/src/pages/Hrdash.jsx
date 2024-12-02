@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, Grid, GridItem } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 import Hrheader from "./Hrheader";
 import { IoIosArrowDown } from "react-icons/io";
 import Posting from "./Posting"; // Ensure this is correctly imported
@@ -12,6 +13,7 @@ import {
   MenuTrigger,
 } from "@/components/ui/menu";
 import Getjobpost from "./Getjobpost";
+import Candidates from "./Candidates";
 
 const Hrdash = () => {
   const [show, setShow] = useState(false); // For modal control
@@ -24,7 +26,7 @@ const Hrdash = () => {
   useEffect(() => {
     document.title = "HR Dashboard"; // Set document title
   }, []);
-
+  const { email } = useParams();
   return (
     <>
       <Hrheader />
@@ -56,7 +58,7 @@ const Hrdash = () => {
                   key={tab}
                   onClick={() => {
                     setCurrentTab(tab);
-                    navigate(`/dashboard/mj@gmail.com/${tab}`);
+                    navigate(`/dashboard/${email}/${tab}`);
                   }}
                   bg="gray.50"
                   color={currentTab === tab ? "#0B1E33" : "#0B1E33.500"}
@@ -161,6 +163,7 @@ const Hrdash = () => {
                   <legend className="font-medium text-lg mb-4">
                     Candidate Details
                   </legend>
+                  <Candidates />
                 </Box>
               )}
               {currentTab === "Settings" && (

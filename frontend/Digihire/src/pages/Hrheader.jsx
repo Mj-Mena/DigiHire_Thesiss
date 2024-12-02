@@ -20,7 +20,7 @@ const Hrheader = () => {
     navigate("/");
   };
   const back = () => {
-    window.location = "http://localhost:5173/";
+    window.location = "https://192.168.254.112:5173/dashboard/mj@gmail.com/";
   };
   return (
     <>

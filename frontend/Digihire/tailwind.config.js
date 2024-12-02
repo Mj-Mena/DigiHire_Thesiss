@@ -8,6 +8,8 @@ export default {
         "Gray-Bg": "#f1f2f4",
         "blue-light": "#013C58",
         "light-gray": "#AAAEB4",
+        "green-but": "#6EB679",
+        "red-but": "#AA5657",
       },
     },
     plugins: [],

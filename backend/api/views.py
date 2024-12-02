@@ -2,9 +2,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from rest_framework import status
-from .serializer import Hrserializer , JobPostingSerializer
+from .serializer import Hrserializer , JobPostingSerializer ,ApplicationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import JobPosting
+from .models import JobPosting , Applicant
 @api_view(['POST'])
 def log_hr(request):
     data = request.data
@@ -52,19 +52,29 @@ def jobpost(request):
     
 @api_view(['POST'])
 def applicantsReq(request):
-    data = request.data 
-    serializer = JobPostingSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response({
-            
-            'message': 'Application submitted created successfully',
-        }, status=status.HTTP_201_CREATED)
-    else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    import logging
+    logger = logging.getLogger(__name__)
+    try:
+        # Existing logic
+        data = request.data
+        serializer = ApplicationSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        logger.error(f"Error: {e}")
+        return Response({"detail": "Internal server error"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
 def getJobList(request):
     jobslist = JobPosting.objects.all()
     serializedData = JobPostingSerializer(jobslist , many = True).data
+    return Response(serializedData)
+
+@api_view(['GET'])
+def getApplicants(request):
+    applicant = Applicant.objects.all()
+    serializedData = ApplicationSerializer(applicant , many = True).data
     return Response(serializedData)

@@ -14,13 +14,14 @@ import PasswordResetConfirm from "./pages/PasswordResetConfirm";
 import Upload from "./pages/Upload";
 import Camera from "./pages/Camera";
 import Error from "./pages/Error";
+import Confirmation from "./pages/Confirmation";
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/upload" element={<Upload />} />
-          <Route path="/camera" element={<Camera />} />
+          <Route path="/camera/:job" element={<Camera />} />
           <Route path="/error" element={<Error />} />
           <Route path="/success" element={<Confirmation />} />
 
