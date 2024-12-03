@@ -120,12 +120,16 @@
   transition: all 0.5s;
   border-radius: 5px;
 }
-.shadow2:hover {
+.shadow2 {
   box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 12px;
 }
 .gradient-background {
   overflow: hidden;
-  background: radial-gradient(circle, rgba(255,255,255,1) 3%, rgba(11,30,51,1) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 3%,
+    rgba(11, 30, 51, 1) 100%
+  );
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -133,5 +137,5 @@
   align-items: center;
 }
 .primary {
-  color: #0B1E33;
+  color: #0b1e33;
 }

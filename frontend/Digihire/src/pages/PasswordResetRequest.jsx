@@ -23,16 +23,13 @@ const PasswordResetRequest = () => {
       const datatosend = {
         email: emailtosend,
       };
-      const response = await fetch(
-        "https://192.168.254.112:8000/password_reset/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(datatosend),
-        }
-      );
+      const response = await fetch("https://127.0.0.1:8000/password_reset/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datatosend),
+      });
       if (response.status == 200) {
         console.log("check message in email");
       } else {

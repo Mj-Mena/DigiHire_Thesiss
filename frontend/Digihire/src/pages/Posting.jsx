@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useForm } from "react-hook-form";
 import "./page.css";
 import { Modal } from "react-bootstrap";
-import { Box, Input, Button, Grid } from "@chakra-ui/react";
+import { Box, Input, Button, Grid, Textarea } from "@chakra-ui/react";
 import {
   NativeSelectField,
   NativeSelectRoot,
@@ -33,32 +33,29 @@ const Posting = ({ isOpen, onClose }) => {
       const user = localStorage.getItem("user");
       const jobtitle = data.jobTitle;
       const dept = data.dept;
-      const educ = data.education;
-      const joblabel = data.jobLabel;
-      const jobrole = data.jobRole;
-      const slot = data.slot;
-      const exp = data.experience;
+      const employ = data.Employment;
+      const location = data.location;
+      const vacancies = data.slot;
+      const neededDeg = data.NeededDeg;
+      const jobdesc = data.Jobdesc;
       const datatosend = {
+        createdBy: user,
         JobTitle: jobtitle,
         department: dept,
-        neededDegree: educ,
-        neededExp: exp,
-        neededApplicant: slot,
-        neededRole: jobrole,
+        employmentTime: employ,
+        location: location,
+        neededDegree: neededDeg,
+        neededApplicant: vacancies,
+        jobdescription: jobdesc,
         status: "active",
-        jobLabel: joblabel,
-        createdBy: user,
       };
-      const response = await fetch(
-        "https://192.168.254.112:8000/log_hr/postJob",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(datatosend),
-        }
-      );
+      const response = await fetch("https://127.0.0.1:8000/log_hr/postJob", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datatosend),
+      });
       console.log(response);
       console.log(datatosend);
     } catch (err) {
@@ -145,6 +142,62 @@ const Posting = ({ isOpen, onClose }) => {
                     </p>
                   )}
                 </Box>
+                <Box gridColumn="span 2">
+                  <label className=" text-sm" htmlFor="post-grad-loc">
+                    Employment time
+                  </label>
+                  <NativeSelectRoot
+                    border="2px solid gray"
+                    className=" grid rounded-md"
+                    gridColumn="span 2"
+                    width="auto"
+                  >
+                    <NativeSelectField
+                      {...register("Employment", {
+                        required: "Enter employment time",
+                      })}
+                      className="pl-2"
+                    >
+                      <option value="" disabled selected hidden>
+                        Select Employment Time
+                      </option>
+
+                      <option value="Part time">Part time</option>
+                      <option value="Full time">Full time</option>
+                    </NativeSelectField>
+                  </NativeSelectRoot>
+                  {errors.Employment && (
+                    <p className="text-sm text-red-500">
+                      {errors.Employment.message}
+                    </p>
+                  )}
+                </Box>
+                <Box gridColumn="span 2">
+                  <label className=" text-sm" htmlFor="location">
+                    Location
+                  </label>
+                  <Input
+                    {...register("location", {
+                      required: "Enter the job locations",
+                    })}
+                    bg="white"
+                    id="post-grad-schoolname"
+                    placeholder="Type here"
+                    _focus={{
+                      borderColor: "gray.900",
+                      outline: "2px solid blue.900",
+                      outlineOffset: "1px",
+                    }}
+                    border="2px solid gray"
+                    p={2}
+                  />
+                  {errors.location && (
+                    <p className="text-sm text-red-500">
+                      {errors.location.message}
+                    </p>
+                  )}
+                </Box>
+
                 <Box className=" mt-8" gridColumn="span 4">
                   <label
                     className=" font-semibold text-lg"
@@ -152,83 +205,6 @@ const Posting = ({ isOpen, onClose }) => {
                   >
                     Qualifications
                   </label>
-                </Box>
-
-                <Box gridColumn="span 2">
-                  <label className=" text-sm" htmlFor="post-grad-major">
-                    Education
-                  </label>
-                  <Input
-                    {...register("education", {
-                      required: "Enter the Department",
-                    })}
-                    bg="white"
-                    id="apost-grad-major"
-                    placeholder="Type here"
-                    _focus={{
-                      borderColor: "gray.900",
-                      outline: "2px solid blue.900",
-                      outlineOffset: "1px",
-                    }}
-                    border="2px solid gray"
-                    p={2}
-                  />
-                  {errors.education && (
-                    <p className="text-sm text-red-500">
-                      {errors.education.message}
-                    </p>
-                  )}
-                </Box>
-
-                <Box gridColumn="span 2">
-                  <label className=" text-sm" htmlFor="post-grad-from">
-                    Experience
-                  </label>
-                  <Input
-                    {...register("experience", {
-                      required: "Enter the Department",
-                    })}
-                    bg="white"
-                    id="post-grad-from"
-                    placeholder="Type here"
-                    _focus={{
-                      borderColor: "gray.900",
-                      outline: "2px solid blue.900",
-                      outlineOffset: "1px",
-                    }}
-                    border="2px solid gray"
-                    p={2}
-                  />
-                  {errors.experience && (
-                    <p className="text-sm text-red-500">
-                      {errors.experience.message}
-                    </p>
-                  )}
-                </Box>
-                <Box gridColumn="span 2">
-                  <label className=" text-sm" htmlFor="post-grad-to">
-                    Job Role
-                  </label>
-                  <Input
-                    {...register("jobRole", {
-                      required: "Enter the Department",
-                    })}
-                    bg="white"
-                    id="post-grad-to"
-                    placeholder="Type here"
-                    _focus={{
-                      borderColor: "gray.900",
-                      outline: "2px solid blue.900",
-                      outlineOffset: "1px",
-                    }}
-                    border="2px solid gray"
-                    p={2}
-                  />
-                  {errors.jobRole && (
-                    <p className="text-sm text-red-500">
-                      {errors.jobRole.message}
-                    </p>
-                  )}
                 </Box>
 
                 <Box gridColumn="span 2">
@@ -245,7 +221,7 @@ const Posting = ({ isOpen, onClose }) => {
                     })}
                     bg="white"
                     id="post-grad-diploma"
-                    placeholder="Type here"
+                    placeholder="How many slot are there?"
                     _focus={{
                       borderColor: "gray.900",
                       outline: "2px solid blue.900",
@@ -260,17 +236,18 @@ const Posting = ({ isOpen, onClose }) => {
                     </p>
                   )}
                 </Box>
+
                 <Box gridColumn="span 2">
                   <label className=" text-sm" htmlFor="post-grad-diploma">
-                    Expiration
+                    Needed Degree
                   </label>
                   <Input
-                    {...register("expiration", {
-                      required: "Enter the expiration",
+                    {...register("NeededDeg", {
+                      required: "What is the minimum degree attained",
                     })}
                     bg="white"
                     id="post-grad-diploma"
-                    placeholder="Type here"
+                    placeholder="2 years of experience"
                     _focus={{
                       borderColor: "gray.900",
                       outline: "2px solid blue.900",
@@ -279,23 +256,24 @@ const Posting = ({ isOpen, onClose }) => {
                     border="2px solid gray"
                     p={2}
                   />
-                  {errors.expiration && (
+                  {errors.NeededDeg && (
                     <p className="text-sm text-red-500">
-                      {errors.expiration.message}
+                      {errors.NeededDeg.message}
                     </p>
                   )}
                 </Box>
-                <Box gridColumn="span 2">
-                  <label className=" text-sm" htmlFor="post-grad-diploma">
-                    Job Label
+
+                <Box gridColumn="span 4">
+                  <label className=" text-sm" htmlFor="jobdesc">
+                    Job Description and other requirements
                   </label>
-                  <Input
-                    {...register("jobLabel", {
-                      required: "Enter the job label",
+                  <Textarea
+                    {...register("Jobdesc", {
+                      required: "What is the minimum degree attained",
                     })}
                     bg="white"
-                    id="post-grad-diploma"
-                    placeholder="Type here"
+                    id="jobdesc"
+                    placeholder="enter job description"
                     _focus={{
                       borderColor: "gray.900",
                       outline: "2px solid blue.900",
@@ -304,9 +282,9 @@ const Posting = ({ isOpen, onClose }) => {
                     border="2px solid gray"
                     p={2}
                   />
-                  {errors.expiration && (
+                  {errors.Jobdesc && (
                     <p className="text-sm text-red-500">
-                      {errors.expiration.message}
+                      {errors.Jobdesc.message}
                     </p>
                   )}
                 </Box>

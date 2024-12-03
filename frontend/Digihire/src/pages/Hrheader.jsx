@@ -10,7 +10,7 @@ import "./page.css";
 import { useNavigate } from "react-router-dom";
 const Hrheader = () => {
   const navigate = useNavigate();
-
+  const user = localStorage.getItem("user");
   const handleLogout = () => {
     // Clear tokens from localStorage
     localStorage.removeItem("access");
@@ -20,7 +20,7 @@ const Hrheader = () => {
     navigate("/");
   };
   const back = () => {
-    window.location = "https://192.168.254.112:5173/dashboard/mj@gmail.com/";
+    window.location = `https://localhost:5173/dashboard/${user}/`;
   };
   return (
     <>

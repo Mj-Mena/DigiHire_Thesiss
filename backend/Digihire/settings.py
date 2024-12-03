@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'corsheaders', 
-      'sslserver',
+    'sslserver',
     'api',
     'rest_framework_simplejwt',
     'django_rest_passwordreset',

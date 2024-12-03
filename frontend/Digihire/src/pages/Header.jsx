@@ -8,11 +8,13 @@ import {
 } from "@/components/ui/menu";
 import "./page.css";
 const Header = () => {
+  const currentIP = window.location.hostname;
+  const serverURL = `https://${currentIP}:5173/`;
   const handleclick = () => {
-    window.location = "https://192.168.254.112:5173/sign";
+    window.location = serverURL + "sign";
   };
   const back = () => {
-    window.location = "https://192.168.254.112:5173/";
+    window.location = serverURL;
   };
   return (
     <>

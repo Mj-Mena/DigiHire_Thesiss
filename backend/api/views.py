@@ -2,9 +2,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from rest_framework import status
-from .serializer import Hrserializer , JobPostingSerializer ,ApplicationSerializer
+from .serializer import Hrserializer, JobPostingSerializer, ApplicationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import JobPosting , Applicant
+from .models import JobPosting, Applicant
+from PIL import Image
+import pytesseract
+import logging
 @api_view(['POST'])
 def log_hr(request):
     data = request.data
@@ -48,6 +51,7 @@ def jobpost(request):
             'message': 'Job Posting created successfully',
         }, status=status.HTTP_201_CREATED)
     else:
+        print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['POST'])
@@ -78,3 +82,10 @@ def getApplicants(request):
     applicant = Applicant.objects.all()
     serializedData = ApplicationSerializer(applicant , many = True).data
     return Response(serializedData)
+
+@api_view(['POST'])
+def upload_image(request):
+    print(request.FILES)
+    return Response(request.FILES)
+
+    

@@ -26,7 +26,7 @@ const Log = () => {
         email: emailtosend,
         password: passtosend,
       };
-      const response = await fetch("https://192.168.254.112:8000/api/log_hr/", {
+      const response = await fetch("https://127.0.0.1:8000/api/log_hr/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -266,12 +266,12 @@ class JobPosting(models.Model) :
     # ForeignKey with blank=True allows applicant to be optional
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE, blank=True, null=True)
     department = models.CharField(max_length=100)
+    employmentTime = models.CharField(max_length=254)
+    location = models.CharField(max_length=254)
     neededDegree = models.CharField(max_length=100)
-    neededExp = models.CharField(max_length=100)
     neededApplicant = models.IntegerField()  # IntegerField does not need max_length
-    neededRole = models.CharField(max_length=100)
     status = models.CharField(max_length=100)
-    jobLabel = models.CharField(max_length=100)
+    jobdescription = models.TextField()
     createdBy = models.CharField(max_length=100, null=True, blank=True)
     
 @receiver(reset_password_token_created)

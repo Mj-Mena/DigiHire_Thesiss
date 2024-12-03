@@ -1,5 +1,14 @@
 import React, { useCallback, useRef, useState } from "react";
-import { Box, Button, Container, Text, VStack, Flex, Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Text,
+  VStack,
+  Flex,
+  Spinner,
+  Textarea,
+} from "@chakra-ui/react";
 import Webcam from "react-webcam";
 import html2canvas from "html2canvas";
 import { useNavigate } from "react-router-dom";
@@ -7,13 +16,14 @@ import { useNavigate } from "react-router-dom";
 function Camera() {
   const [img, setImg] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [ocrResult, setOcrResult] = useState(""); // State to store OCR result
   const webcamRef = useRef(null);
   const navigate = useNavigate();
 
   const videoConstraints = {
-    width: 640,  // Increased video width
-    height: 480, // Increased video height
-    facingMode: "environment",  // Using the back camera
+    width: 640,
+    height: 480,
+    facingMode: "environment",
   };
 
   const capture = useCallback(() => {
@@ -21,54 +31,83 @@ function Camera() {
     setImg(imageSrc);
   }, [webcamRef]);
 
-  const handleSubmit = () => {
-    if (img) {
-      // Store the image in localStorage
-      localStorage.setItem("capturedImage", img);
-      setIsProcessing(true);
+  const dataURItoBlob = (dataURI) => {
+    const byteString = atob(dataURI.split(",")[1]);
+    const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uintArray = new Uint8Array(arrayBuffer);
 
-      // Simulate OCR processing (you can replace this with actual OCR logic)
-      setTimeout(() => {
-        setIsProcessing(false);  // Stop processing after 3 seconds (simulate OCR)
-        alert("OCR Processing Complete!")
-      }, 3000);
+    for (let i = 0; i < byteString.length; i++) {
+      uintArray[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([uintArray], { type: mimeString });
+  };
+
+  const sendImageToBackend = async () => {
+    if (img) {
+      try {
+        const formData = new FormData();
+        const imageBlob = dataURItoBlob(img);
+        formData.append("file", imageBlob, "resume.jpg");
+
+        setIsProcessing(true); // Show the spinner
+
+        const response = await fetch("https://127.0.0.1:8000/getocr/", {
+          method: "POST",
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("OCR Result:", data.result);
+          setOcrResult(data.result); // Store the OCR result
+        } else {
+          console.error("Failed to process the image:", response.statusText);
+          alert("Failed to process the image. Please try again.");
+        }
+      } catch (err) {
+        console.error("Error sending image:", err);
+        alert("An error occurred. Please try again.");
+      } finally {
+        setIsProcessing(false); // Reset the processing state
+      }
     }
   };
+
   const handleCloseCamera = () => {
-    navigate('/upload');
-  };
-  const confirmation = () => {
-    navigate('/success')
+    navigate("/upload");
   };
 
   const exportToPNG = () => {
     if (!img) return;
-  
+
     const element = document.createElement("div");
-    element.style.display = "inline-block"; 
+    element.style.display = "inline-block";
     const imgElement = document.createElement("img");
     imgElement.src = img;
-    
+
     element.appendChild(imgElement);
     document.body.appendChild(element);
-  
+
     html2canvas(element, {
-      useCORS: true, 
-      allowTaint: true, 
-      logging: true, 
-    }).then((canvas) => {
-      const link = document.createElement("a");
-      link.href = canvas.toDataURL("image/png");
-      link.download = "resume.png";
-      link.click();
-      confirmation();
-  
-      document.body.removeChild(element);
-    }).catch(error => {
-      console.error("Error capturing image:", error);
-    });
+      useCORS: true,
+      allowTaint: true,
+      logging: true,
+    })
+      .then((canvas) => {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "resume.png";
+        link.click();
+        sendImageToBackend(); // Call backend for OCR processing
+        document.body.removeChild(element);
+      })
+      .catch((error) => {
+        console.error("Error capturing image:", error);
+      });
   };
-  
+
   return (
     <Box bg="gray.50" minH="100vh" py={12}>
       <Container maxW="container.lg">
@@ -115,7 +154,7 @@ function Camera() {
                   onClick={capture}
                   w="50%"
                   boxShadow="lg"
-                  bg={"gray.50"} 
+                  bg={"gray.50"}
                   color="#0B1E33"
                 >
                   Capture Resume
@@ -133,7 +172,7 @@ function Camera() {
                   onClick={() => setImg(null)}
                   w="50%"
                   boxShadow="lg"
-                  bg={"gray.50"} 
+                  bg={"gray.50"}
                   color="#0B1E33"
                 >
                   Retake
@@ -158,16 +197,33 @@ function Camera() {
             Submit
           </Button>
 
-            <Button
-              size="lg"
-              mt={4}
-              onClick={handleCloseCamera}
-              w="100%"
-              boxShadow="lg"
-              bg={"gray.50"} color="#0B1E33"
-            >
-              Back
-            </Button>
+          <Button
+            size="lg"
+            mt={4}
+            onClick={handleCloseCamera}
+            w="100%"
+            boxShadow="lg"
+            bg={"gray.50"}
+            color="#0B1E33"
+          >
+            Back
+          </Button>
+
+          {/* Display OCR result */}
+          {ocrResult && (
+            <Box mt={8} w="100%">
+              <Text fontSize="2xl" fontWeight="bold" color="#0B1E33">
+                OCR Result:
+              </Text>
+              <Textarea
+                value={ocrResult}
+                isReadOnly
+                bg="gray.100"
+                height="200px"
+                mt={4}
+              />
+            </Box>
+          )}
         </VStack>
       </Container>
     </Box>

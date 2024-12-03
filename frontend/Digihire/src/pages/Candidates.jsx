@@ -12,7 +12,7 @@ const Candidates = () => {
   const fetchapplicant = async () => {
     try {
       const response = await fetch(
-        "https://192.168.254.112:8000/log_hr/getCandidates"
+        "https://127.0.0.1:8000/log_hr/getCandidates"
       );
       const data = await response.json();
       setApplicant(data); // Store the fetched jobs in state

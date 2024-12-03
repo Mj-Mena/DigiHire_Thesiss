@@ -489,7 +489,7 @@ const Form = () => {
       referenceoccupation2: relrefoccu2,
       referenceoccupation3: relrefoccu3,
     };
-    const response = await fetch("https://192.168.254.112:8000/apply_now/", {
+    const response = await fetch("https://127.0.0.1:8000/apply_now/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
